@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Stylesheet blocking script execution</title>
+  <link rel="help" href="https://html.spec.whatwg.org/multipage/semantics.html#interactions-of-styling-and-scripting" />
+  <script src="/resources/testharness.js"></script>
+  <script src="/resources/testharnessreport.js"></script>
+</head>
+<body>
+  <link rel="stylesheet" type="text/css" href="support/a-green.css?pipe=trickle(d1)" />
+  <div class="a">Green</div>
+  <script>
+    test(function() {
+      assert_equals(getComputedStyle(document.querySelector(".a")).color, "rgb(0, 128, 0)");
+    }, "The linked stylesheet should block script execution until loaded.")
+  </script>
+</body>
+</html>
